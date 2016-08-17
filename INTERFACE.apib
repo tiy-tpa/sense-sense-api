@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: https://one-list.herokuapp.com
+HOST: https://one-list-api.herokuapp.com
 
 # One List
 
@@ -11,7 +11,9 @@ One List is a simple API allowing consumers to manage a TODO list.
 
 # Group Items
 
-## Item Collection Resource [/items{?access_token}]
+## Item Collections [/items{?access_token}]
+
++ Attributes (array[Item])
 
 + Parameters
 
@@ -38,13 +40,12 @@ One List is a simple API allowing consumers to manage a TODO list.
 
 You may create new items using this action. It takes a JSON object containing the task text.
 
-+ text (string) - The task at hand
-+ complete (boolean) - Whether or not the task has been completed.
-
 + Request (application/json)
 
             {
-              "text": "Learn about Regular Expressions"
+              "item": {
+                "text": "Learn about Regular Expressions"
+              }
             }
 
 + Response 201 (application/json)
@@ -61,7 +62,9 @@ You may create new items using this action. It takes a JSON object containing th
                   "complete": false
                 }
 
-## Item Resource [/items/{id}{?access_token}]
+## Singular Item [/items/{id}{?access_token}]
+
++ Attributes (Item)
 
 + Parameters
 
@@ -73,7 +76,7 @@ You may create new items using this action. It takes a JSON object containing th
 + Request (application/json)
 
 + Response 200 (application/json)
-
+    + Attributes (Item)
     + Body
 
             {
@@ -86,7 +89,11 @@ You may create new items using this action. It takes a JSON object containing th
 
 + Request (application/json)
 
-        { "complete": true }
+        {
+          "item": {
+            "complete": true
+          }
+        }
 
 + Response 204
 
@@ -95,3 +102,10 @@ You may create new items using this action. It takes a JSON object containing th
 + Request (application/json)
 
 + Response 200
+
+# Data Structures
+
+## Item (object)
+
++ text (required, string) - The task at hand
++ complete (boolean) - Whether or not the task has been completed.
