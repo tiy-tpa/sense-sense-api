@@ -1,0 +1,97 @@
+FORMAT: 1A
+HOST: https://one-list.herokuapp.com
+
+# One List
+
+One List is a simple API allowing consumers to manage a TODO list.
+
+## Authentication
+
+*One List API* uses token authentication. Your token can be any text you wish. As long as you use the same token between requests, you'll have access to the same list items.
+
+# Group Items
+
+## Item Collection Resource [/items{?access_token}]
+
++ Parameters
+
+    + access_token: "illustriousvoyage" (string) - Your unique access token
+
+### List Items [GET]
+
++ Response 200 (application/json)
+
+            [
+              {
+                "id": 1,
+                "text": "Learn HTML & CSS",
+                "complete": true
+              },
+              {
+                "id": 2,
+                "text": "Master React",
+                "complete": false
+              }
+            ]
+
+### Create a New Item [POST]
+
+You may create new items using this action. It takes a JSON object containing the task text.
+
++ text (string) - The task at hand
++ complete (boolean) - Whether or not the task has been completed.
+
++ Request (application/json)
+
+            {
+              "text": "Learn about Regular Expressions"
+            }
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            Location: /items/3
+
+    + Body
+
+                {
+                  "id": 3,
+                  "text": "Learn about Regular Expressions",
+                  "complete": false
+                }
+
+## Item Resource [/items/{id}{?access_token}]
+
++ Parameters
+
+    + id: 1 (number) - The unique identifier of the item
+    + access_token: "illustriousvoyage" (string) - Your unique access token
+
+### Retrieve an Item [GET]
+
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "id": 1,
+              "text": "Learn HTML & CSS",
+              "complete": true
+            }
+
+### Update an Item [PUT]
+
++ Request (application/json)
+
+        { "complete": true }
+
++ Response 204
+
+### Remove an Item [DELETE]
+
++ Request (application/json)
+
++ Response 200
