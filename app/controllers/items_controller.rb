@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
 
   # GET /items
   def index
-    @items = current_user.items.all
+    @items = current_user.items.all.order(created_at: :asc)
 
     render json: @items
   end
