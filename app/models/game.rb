@@ -7,7 +7,7 @@ class Game < ApplicationRecord
   before_create :ensure_moves_and_secret
 
   def as_json(options=nil)
-    super(options.merge(except: [:secret]))
+    super(options.merge(except: [:secret, :created_at, :updated_at, :user_id]))
   end
 
   def guess(guess)
