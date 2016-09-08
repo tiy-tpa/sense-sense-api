@@ -13,7 +13,12 @@ class GamesController < ApplicationController
 
   # POST /games/move
   def move
-    @game = Game.find(params[:game_id])
+    @game = current_user.games.find_by(id: params[:game_id])
+
+    unless @game
+      render status: :not_found
+      return
+    end
 
     guess = params[:guess]
 
