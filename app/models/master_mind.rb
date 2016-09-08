@@ -1,5 +1,5 @@
 class MasterMind
-  PEG_COLORS = %w{Blue Orange Green Purple Yellow Pink}
+  PEG_COLORS = %w{green aqua fuschia blueberry fire coal}
 
   attr_accessor :secret, :moves
 
