@@ -1,111 +1,73 @@
 FORMAT: 1A
-HOST: https://one-list-api.herokuapp.com
+HOST: https://sense-sense-api.herokuapp.com
 
-# One List
+# Sensei Sense
 
-One List is a simple API allowing consumers to manage a TODO list.
+Sensei Sense is the best MasterMind derivative in the world
 
 ## Authentication
 
-*One List API* uses token authentication. Your token can be any text you wish. As long as you use the same token between requests, you'll have access to the same list items.
+*Sense Sense API* uses token authentication. Your token can be any text you wish. As long as you use the same token between requests, you'll have access to the same list items.
 
-# Group Items
+# Game
 
-## Item Collections [/items{?access_token}]
+## Game [/games{?access_token}]
 
-+ Attributes (array[Item])
+Creates a new game
 
 + Parameters
 
     + access_token: "illustriousvoyage" (string) - Your unique access token
 
-### List Items [GET]
+### Create [POST]
 
 + Response 200 (application/json)
 
             [
-              {
-                "id": 1,
-                "text": "Learn HTML & CSS",
-                "complete": true
-              },
-              {
-                "id": 2,
-                "text": "Master React",
-                "complete": false
-              }
+              "id": 1,
+              "moves" : []
             ]
 
-### Create a New Item [POST]
+## Move [/games/move{?access_token,game_id}]
 
-You may create new items using this action. It takes a JSON object containing the task text.
+### Make a Move [POST]
+
+You may create new move using this action. It takes a JSON object containing the Guess.
 
 + Request (application/json)
 
             {
-              "item": {
-                "text": "Learn about Regular Expressions"
-              }
+              "guess": ["Red", "Green", "Blue", "Orange"]
             }
 
 + Response 201 (application/json)
 
     + Headers
-    
-            Location: /items/3
 
     + Body
 
-                {
-                  "id": 3,
-                  "text": "Learn about Regular Expressions",
-                  "complete": false
-                }
-
-## Singular Item [/items/{id}{?access_token}]
-
-+ Attributes (Item)
-
-+ Parameters
-
-    + id: 1 (number) - The unique identifier of the item
-    + access_token: "illustriousvoyage" (string) - Your unique access token
-
-### Retrieve an Item [GET]
-
-+ Request (application/json)
-
-+ Response 200 (application/json)
-    + Attributes (Item)
-    + Body
-
-            {
+            [
               "id": 1,
-              "text": "Learn HTML & CSS",
-              "complete": true
-            }
-
-### Update an Item [PUT]
-
-+ Request (application/json)
-
-        {
-          "item": {
-            "complete": true
-          }
-        }
-
-+ Response 204
-
-### Remove an Item [DELETE]
-
-+ Request (application/json)
-
-+ Response 200
+              "moves": [
+                {
+                  "guess": ["Red", "Green", "Blue", "Orange"],
+                  "result": ["exact match", "inexact_match", "miss", "miss"]
+                },
+                {
+                  "guess": ["Blue", "Green", "Blue", "Orange"],
+                  "result": ["exact match", "inexact_match", "miss", "miss"]
+                }
+              ]
+            ]
 
 # Data Structures
 
-## Item (object)
+## Game (object)
 
-+ text (required, string) - The task at hand
-+ complete (boolean) - Whether or not the task has been completed.
++ id (required, number) - The id of this game
++ moves (required, array) - Array of moves
+
+## Move (object)
+
++ guess (required, array) - The list of four color guesses
++ result (required, array) - The list of four results (exact_match, inexact_match, miss)

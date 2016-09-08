@@ -21,4 +21,4 @@ default: &default
 
 development:
   <<: *default
-  database: one-list
+  database: sense-sense
