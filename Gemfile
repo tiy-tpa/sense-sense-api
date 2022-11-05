@@ -7,6 +7,7 @@ gem 'pg'
 gem 'puma'
 gem 'rack-cors'
 gem "net-smtp", "~> 0.3.3"
+gem "net-pop", "~> 0.1.2"
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -17,4 +18,5 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
+
 
