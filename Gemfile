@@ -8,6 +8,7 @@ gem 'puma'
 gem 'rack-cors'
 gem "net-smtp", "~> 0.3.3"
 gem "net-pop", "~> 0.1.2"
+gem "net-imap", "~> 0.3.1"
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -18,5 +19,4 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
 
