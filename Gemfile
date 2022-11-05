@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '3.1.2'
 
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
+gem 'rails', '~> 6.1'
+gem 'pg'
+gem 'puma'
 gem 'rack-cors'
 
 group :development, :test do
